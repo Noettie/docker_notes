@@ -25,3 +25,25 @@ docker export - Exports a containers filesystem as a tar archive
 docker import - Import the contents from a tarball to create a filesystem image
 docker save - Save one or two images to a tar archive 
 docker load - Load an image from a tar archive of STDIN
+
+#Display running and non running container
+$ docker ps -a
+
+#Clean docker host
+
+$ docker rm -f $(docker ps -a -q)
+
+#Stop a container
+
+$ docker stop <container_id>
+
+#Kill a container
+
+$ docker kill <cointaner_id>
+
+#Display docker host info
+
+$ docker info
+
+
+
