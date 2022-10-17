@@ -45,5 +45,13 @@ $ docker kill <cointaner_id>
 
 $ docker info
 
+#Changing hostname of EC2 instance
+$ sudo vim /etc/hostname
+update hostname (e.g docker host)
+restart the server: 
+$ sudo init 6
+Then connect to the server again
+This helps in knowing whether you are at the container level or docker host level
+
 
 
