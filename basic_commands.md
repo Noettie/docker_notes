@@ -55,6 +55,8 @@ This helps in knowing whether you are at the container level or docker host leve
 
 #To clean up your host
 docker system prune -a
+#To keep a container in running status the backend
 
+ctl + p & ctl + q
 
 
