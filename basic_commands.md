@@ -53,5 +53,8 @@ $ sudo init 6
 Then connect to the server again
 This helps in knowing whether you are at the container level or docker host level
 
+#To clean up your host
+docker system prune -a
+
 
 
