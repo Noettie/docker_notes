@@ -59,4 +59,106 @@ docker system prune -a
 
 ctl + p & ctl + q
 
+To access a web application as a contianer you should use port mapping .Execute following command:
+
+$ docker run --name <websitename> <webserver_name> -p pupiphost:<default_web_port> -d <webserver_name>
+  
+  e.g : 
+  
+  $ docker run --name mynginx -p 7272:80 -d nginx
+  
+  -p : port mapping, -d: run in detached mode
+  
+  Steps to change the default webbage of a webserver:
+  
+  1. Go to the underlying system of the container using the command:
+  
+  $ docker exec -it mynginx /bin/bash 
+  
+  This command takes you to the container Operating system.
+  
+  2. Identify which file to target by finding the default nginx webpage index.html :
+  
+  # /usr/share/nginx/html
+  
+  3. cd into the html using the default webpage path above 
+  4. cat the html file. The contents of the default webpage will be present
+  5. Change the entire contents to the contents of your own web page using  and paste your own html code: 
+   $ cat > html
+  
+  To run jenkins as a container:
+ 1. $ docker run --name myjenkins -d -p 8080:8080 jenkins/jenkins:2.53
+  $docker ps -a
+  
+ 2. Use the following to get the access to the underlying OS:
+  
+  docker exec -it myjenkins /bin/bash
+  
+  3. cat the path given to access the password
+  
+  4. Copy and paste the password 
+  
+  For automatic port assignment use the -P flag , e.g :
+  
+  $ docker run --name myhttpd -d -P httpd
+  
+  -p (small caps) is for manual port assignment
+  
+  Creating a database as a container e.g
+  
+  1. $ docker run --name mydb -d -e MYSQL_ROOT_PASSWORD=12345 mysql
+  
+  2. Connect to the data through the underlying OS:
+  
+  $ docker exec -it mydb /bin/bash
+  
+  3. Gain access to the db using:
+  
+  mysql -u root -p
+  
+  4. Enter the environment password
+  
+  #To mount a volume to the container use the following:
+  
+  $ docker run --name myalpine -it -v /mydata alpine
+  
+ $ ls
+  
+  cd mydata
+  
+  add the files you want saved
+  When the container is removed all data is lost exept from the mydata file
+  
+  #To retrieve the data:
+  
+  cd /
+  cd var
+  cd lib
+  cd docker
+  cd volumes
+  ls
+  ls -lt
+  check the newly created file
+  cd int it
+  ls
+  cd _data
+  
+ path_to_mount_volume:          /var/lib/docker/volumes/
+  
+  #Docker Volumes Container
+  Mountaing a volume and sharing it with several containers
+  
+  $ docker run --name c1 -it -v /shared_drive alpine
+  
+  $ docker run --name c2 -it ---voumes-from c1 busybox
+  
+  ls 
+  cd shared_drive
+  ls
+  
+  create files
+  
+  
+  
+  
 
