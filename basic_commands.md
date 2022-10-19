@@ -155,8 +155,76 @@ $ docker run --name <websitename> <webserver_name> -p pupiphost:<default_web_por
   ls 
   cd shared_drive
   ls
-  
   create files
+  
+  Working collaboratively on a project
+  Step to take:
+  
+  1. Download customized image :
+  $ docker run --name project1 -it alpine
+  2. Install required packages
+  $ apk update
+  $ apk add git
+  mkdir project2022
+  cd project2022
+  git clone 
+  cd ..
+  apk add maven
+  exit 
+  All prerequirements for project1 installed
+  
+  docker ps -a
+  docker commit project1 project2022
+  docker images
+  
+  image should be present on hub.docker.com
+  
+  Next step is to push image to hub.docker.com
+  
+  $ docker login enter
+  
+  and enter username $ password
+  
+  $ docker tag project2022 <docker_hub_username/project2022>
+  $ docker images
+  $ docker rmi project2022
+  $ docker push <docker_hub_username/project2022>
+  
+  #Creating customized docker image
+  
+  #Use DOCKERFILE
+  
+  Write a dockerfile with keyword FROM
+  
+  Example:
+  
+  FROM ubuntu
+  MAINTAINER nothando
+  RUN apt update
+  RUN apt install -y git 
+  RUN apt install -y maven
+  RUN apt install -y tree
+  RUN apt install -y default-jdk   (java)
+  
+  crl+ C / save and quit (:wq!)
+  
+  Execute the command:
+  
+  docker build -t myimage .   (the . means in the pwd)
+  
+  Result is a customized image with all packages installed
+  
+  If more than one dockerfile exists use:
+  
+  $ docker build -f <dockerfile_name> -t <image_name> .
+  
+  
+  
+  
+  
+ 
+  
+  
   
   
   
