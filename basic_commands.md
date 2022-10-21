@@ -218,10 +218,54 @@ $ docker run --name <websitename> <webserver_name> -p pupiphost:<default_web_por
   
   $ docker build -f <dockerfile_name> -t <image_name> .
   
+  You can start two containers and by default they will be of bridge network e.g
   
+  $ docker run --name c1 -it alpine
+  $ docker run --name c2 -it --link c1 alpine 
   
+  Here you are in c2 container which is linked to c1. You can ping c1 since they are linked
   
+  If you jump into c1 and try and ping c2 its not possible as they are not linked. You can only ping the c2 using its IP address but not the container name.
+  Linking is necessary first. 
   
+  Docker Swarm  cluser
+  
+  1. Create 5 servers
+  2. Choose one server to be the manager node by running the command:
+  
+  $ docker swarm init --advertise-addr <node_ipaddress>
+  
+  3. Copy and paste the token to other nodes to make them worker nodes
+  
+  4. Create container on node 1 and make it available across all clusters
+  
+  $ docker service create --name happyhands -d -p 070:80 ubuntu/apache
+  
+  5. Check port on all nodes if websites if running
+  
+  6.Delete other nodes and check if the website is available
+  
+  ** If you delete the mamanger node the entire swam cluster id destroyed and the appplicaion becomes is inaccessible.
+  The servers, the worker nodes goes into headless state, they have no manager.
+  
+  This is addressed by Docker cluster formation where you have several managers
+  
+  If there are more requests than a server can handle you should replicate the server using the command:
+  
+  $ docker service create --name svc1 -d -p 8080:80 --replicas 5 ubuntu/apache2
+  
+  Chck how many replicas are created 
+  $ docker service ls
+  
+  Choosing desired state of replicas:
+  
+  $ docker service scale svl1=10 
+  
+  ( this is a declarative approach, # of containers required)
+
+  $ docker service scale svc1=1
+  
+  Auto scaling is NOT available with Docker
  
   
   
