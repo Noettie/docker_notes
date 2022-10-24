@@ -1,51 +1,53 @@
-#First and Foremost: 
+# Working with Docker 
+
+## First and Foremost: 
 1. Create an acc with DockerHub
 2.Open Play With Docker Platform (to play with docker)
 3. Add a new instance
 
-#List Docker images
+### List Docker images
 
 docker images
 
-#Show all images
+### Show all images
 
 docker images -a
 
-#List full length image i.d
+### List full length image i.d
 
 docker images --no-trunc
 
-#List out images with filter
+### List out images with filter
 
 docker images --fliter=reference='image_name'
 
-#Saving images that you created
+### Saving images that you created
 
 docker export - Exports a containers filesystem as a tar archive
 docker import - Import the contents from a tarball to create a filesystem image
 docker save - Save one or two images to a tar archive 
 docker load - Load an image from a tar archive of STDIN
 
-#Display running and non running container
+### Display running and non running container
 $ docker ps -a
 
-#Clean docker host
+### Clean docker host
 
 $ docker rm -f $(docker ps -a -q)
 
-#Stop a container
+### Stop a container
 
 $ docker stop <container_id>
 
-#Kill a container
+### Kill a container
 
 $ docker kill <cointaner_id>
 
-#Display docker host info
+### Display docker host info
 
-$ docker info
+## $ docker info
 
-#Changing hostname of EC2 instance
+### Changing hostname of EC2 instance
 $ sudo vim /etc/hostname
 update hostname (e.g docker host)
 restart the server: 
@@ -53,23 +55,24 @@ $ sudo init 6
 Then connect to the server again
 This helps in knowing whether you are at the container level or docker host level
 
-#To clean up your host
+### To clean up your host
 docker system prune -a
-#To keep a container in running status the backend
+
+### To keep a container in running status the backend
 
 ctl + p & ctl + q
 
-To access a web application as a contianer you should use port mapping .Execute following command:
+### To access a web application as a contianer you should use port mapping .Execute following command:
 
 $ docker run --name <websitename> <webserver_name> -p pupiphost:<default_web_port> -d <webserver_name>
   
-  e.g : 
+ e.g : 
   
-  $ docker run --name mynginx -p 7272:80 -d nginx
+ $ docker run --name mynginx -p 7272:80 -d nginx
   
-  -p : port mapping, -d: run in detached mode
+-p : port mapping, -d: run in detached mode
   
-  Steps to change the default webbage of a webserver:
+  ## Steps to change the default webbage of a webserver:
   
   1. Go to the underlying system of the container using the command:
   
@@ -79,26 +82,27 @@ $ docker run --name <websitename> <webserver_name> -p pupiphost:<default_web_por
   
   2. Identify which file to target by finding the default nginx webpage index.html :
   
-  # /usr/share/nginx/html
+  $ /usr/share/nginx/html
   
   3. cd into the html using the default webpage path above 
   4. cat the html file. The contents of the default webpage will be present
   5. Change the entire contents to the contents of your own web page using  and paste your own html code: 
    $ cat > html
   
-  To run jenkins as a container:
+  ## To run jenkins as a container:
+  
  1. $ docker run --name myjenkins -d -p 8080:8080 jenkins/jenkins:2.53
   $docker ps -a
   
  2. Use the following to get the access to the underlying OS:
   
-  docker exec -it myjenkins /bin/bash
+ docker exec -it myjenkins /bin/bash
   
-  3. cat the path given to access the password
+3. cat the path given to access the password
   
-  4. Copy and paste the password 
+4. Copy and paste the password 
   
-  For automatic port assignment use the -P flag , e.g :
+### For automatic port assignment use the -P flag , e.g :
   
   $ docker run --name myhttpd -d -P httpd
   
