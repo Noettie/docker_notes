@@ -108,7 +108,7 @@ $ docker run --name <websitename> <webserver_name> -p pupiphost:<default_web_por
   
   -p (small caps) is for manual port assignment
   
-  Creating a database as a container e.g
+  ### Creating a database as a container e.g
   
   1. $ docker run --name mydb -d -e MYSQL_ROOT_PASSWORD=12345 mysql
   
@@ -122,18 +122,18 @@ $ docker run --name <websitename> <webserver_name> -p pupiphost:<default_web_por
   
   4. Enter the environment password
   
-  #To mount a volume to the container use the following:
+  ## #To mount a volume to the container use the following:
   
-  $ docker run --name myalpine -it -v /mydata alpine
+ $ docker run --name myalpine -it -v /mydata alpine
   
- $ ls
+$ ls
   
-  cd mydata
+cd mydata
   
-  add the files you want saved
-  When the container is removed all data is lost exept from the mydata file
+- add the files you want saved
+ - When the container is removed all data is lost exept from the mydata file
   
-  #To retrieve the data:
+### To retrieve the data:
   
   cd /
   cd var
@@ -149,11 +149,11 @@ $ docker run --name <websitename> <webserver_name> -p pupiphost:<default_web_por
   
  path_to_mount_volume:          /var/lib/docker/volumes/
   
-  #Docker Volumes Container
-  Mountaing a volume and sharing it with several containers
+ ### Docker Volumes Container
+  
+  Mountaing a volume and sharing it with several containers:
   
   $ docker run --name c1 -it -v /shared_drive alpine
-  
   $ docker run --name c2 -it ---voumes-from c1 busybox
   
   ls 
@@ -161,7 +161,8 @@ $ docker run --name <websitename> <webserver_name> -p pupiphost:<default_web_por
   ls
   create files
   
-  Working collaboratively on a project
+ ### Working collaboratively on a project
+  
   Step to take:
   
   1. Download customized image :
@@ -181,7 +182,7 @@ $ docker run --name <websitename> <webserver_name> -p pupiphost:<default_web_por
   docker commit project1 project2022
   docker images
   
-  image should be present on hub.docker.com
+  Image should be present on hub.docker.com
   
   Next step is to push image to hub.docker.com
   
@@ -194,9 +195,9 @@ $ docker run --name <websitename> <webserver_name> -p pupiphost:<default_web_por
   $ docker rmi project2022
   $ docker push <docker_hub_username/project2022>
   
-  #Creating customized docker image
+### Creating customized docker image
   
-  #Use DOCKERFILE
+### Use DOCKERFILE
   
   Write a dockerfile with keyword FROM
   
@@ -222,7 +223,7 @@ $ docker run --name <websitename> <webserver_name> -p pupiphost:<default_web_por
   
   $ docker build -f <dockerfile_name> -t <image_name> .
   
-  You can start two containers and by default they will be of bridge network e.g
+  ### You can start two containers and by default they will be of bridge network e.g
   
   $ docker run --name c1 -it alpine
   $ docker run --name c2 -it --link c1 alpine 
@@ -232,7 +233,7 @@ $ docker run --name <websitename> <webserver_name> -p pupiphost:<default_web_por
   If you jump into c1 and try and ping c2 its not possible as they are not linked. You can only ping the c2 using its IP address but not the container name.
   Linking is necessary first. 
   
-  Docker Swarm  cluser
+ ### Docker Swarm  cluster
   
   1. Create 5 servers
   2. Choose one server to be the manager node by running the command:
@@ -258,10 +259,10 @@ $ docker run --name <websitename> <webserver_name> -p pupiphost:<default_web_por
   
   $ docker service create --name svc1 -d -p 8080:80 --replicas 5 ubuntu/apache2
   
-  Chck how many replicas are created 
+ ### Check how many replicas are created 
   $ docker service ls
   
-  Choosing desired state of replicas:
+ ### Choosing desired state of replicas:
   
   $ docker service scale svl1=10 
   
