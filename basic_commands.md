@@ -267,6 +267,26 @@ $ docker run --name <websitename> <webserver_name> -p pupiphost:<default_web_por
   
   Auto scaling is NOT available with Docker
  
+  TERRAFORM
+  Writting script to create EC2 
+  Steps:
+  
+  1. Log on to AWS console. Required to create EC2 :
+  - Create key pair (have keypairname)
+  - get AMI i.d
+  - vpc i.d (can use default for testing or create one)
+  - region where ec2 instance will run
+  - instance size
+  
+  2. Create folder on host (your desktop)
+  3. Create .tf file in the folder and make sure it is saved as .tf
+  4. Open command promt and cd into created folder on step2.
+  5. Initialze terraform:
+   >   terraform init
+  6. If you dont want to define your access credentials in the .tf file you must have installed the aws CLI
+  7. Define blocks in the .tf scrpits using the terraform documentation
+  8. In the amiid variable you have remoce the default server type and instance type the script becomes dynamic
+  
   
   
   
